@@ -1,16 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PackageId>NetEbics</PackageId>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>EBICS.Net</PackageId>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <Authors>Bjoern Kuensting</Authors>
+    <Authors>Bjoern Kuensting, Pavels Nikolajevs</Authors>
     <NeutralLanguage>en-US</NeutralLanguage>
     <AssemblyTitle>.NET EBICS Client Library</AssemblyTitle>
     <Copyright>Bjoern Kuensting</Copyright>
     <DefineConstants>$(DefineConstants)</DefineConstants>
     <LangVersion>7.2</LangVersion>
-    <AssemblyName>NetEbics</AssemblyName>
-    <RootNamespace>NetEbics</RootNamespace>
+    <AssemblyName>EBICS.Net</AssemblyName>
+    <RootNamespace>EbicsNet</RootNamespace>
+    <Product>EBICS.Net</Product>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>none</DebugType>

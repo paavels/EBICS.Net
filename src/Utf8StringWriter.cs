@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace NetEbics
+namespace EbicsNet
 {
     public class Utf8StringWriter : StringWriter
     {

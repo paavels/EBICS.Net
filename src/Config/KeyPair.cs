@@ -16,7 +16,7 @@ using StatePrinting.FieldHarvesters;
 using StatePrinting.OutputFormatters;
 using StatePrinting.ValueConverters;
 
-namespace NetEbics.Config
+namespace EbicsNet.Config
 {
     public abstract class KeyPair<T> : IDisposable
     {

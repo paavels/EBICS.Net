@@ -6,7 +6,7 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-namespace NetEbics.Commands
+namespace EbicsNet.Commands
 {
     public enum TransactionType
     {

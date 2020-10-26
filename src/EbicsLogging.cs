@@ -8,7 +8,7 @@
 
 using Microsoft.Extensions.Logging;
 
-namespace NetEbics
+namespace EbicsNet
 {
     public static class EbicsLogging
     {

@@ -7,9 +7,9 @@
  */
 
 using System;
-using NetEbics.Config;
+using EbicsNet.Config;
 
-namespace NetEbics.Responses
+namespace EbicsNet.Responses
 {
     public class HpbResponse : Response
     {

@@ -6,7 +6,7 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-namespace NetEbics.Parameters
+namespace EbicsNet.Parameters
 {
     public class CreditTransferTransactionInfo
     {

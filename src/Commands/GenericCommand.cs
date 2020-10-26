@@ -8,9 +8,9 @@
 
 using System;
 using Microsoft.Extensions.Logging;
-using NetEbics.Responses;
+using EbicsNet.Responses;
 
-namespace NetEbics.Commands
+namespace EbicsNet.Commands
 {
     internal abstract class GenericCommand<T> : Command where T : Response
     {

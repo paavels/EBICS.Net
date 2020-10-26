@@ -8,7 +8,7 @@
 
 using System;
 
-namespace NetEbics.Parameters
+namespace EbicsNet.Parameters
 {
     public class PtkParams : Params
     {

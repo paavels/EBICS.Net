@@ -9,9 +9,9 @@
 using System;
 using System.Linq;
 using System.Xml.Linq;
-using NetEbics.Config;
+using EbicsNet.Config;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal class AuthenticationPubKeyInfo : NamespaceAware, IXElementSerializer
     {

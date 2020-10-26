@@ -9,7 +9,7 @@
 using StatePrinting;
 using StatePrinting.OutputFormatters;
 
-namespace NetEbics.Parameters
+namespace EbicsNet.Parameters
 {
     public abstract class Params
     {

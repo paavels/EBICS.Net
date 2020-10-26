@@ -6,9 +6,9 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-using NetEbics.Config;
+using EbicsNet.Config;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal abstract class NamespaceAware
     {

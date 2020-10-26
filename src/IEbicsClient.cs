@@ -6,11 +6,11 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-using NetEbics.Config;
-using NetEbics.Parameters;
-using NetEbics.Responses;
+using EbicsNet.Config;
+using EbicsNet.Parameters;
+using EbicsNet.Responses;
 
-namespace NetEbics
+namespace EbicsNet
 {
     public interface IEbicsClient
     {

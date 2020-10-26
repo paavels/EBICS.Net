@@ -9,9 +9,9 @@
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using NetEbics.Config;
+using EbicsNet.Config;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal class XPathHelper
     {

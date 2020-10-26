@@ -1,27 +1,26 @@
-# Important
+# EBICS.Net - EBICS client communication library for .NET
 
-**This repository has moved to https://codeberg.org/hohlerde/NetEbics**
+EBICS.Net is online banking client library to connect using [EBICS](http://www.ebics.org) protocol.
+Current version is 0.1.1. See [ChangeLog](CHANGELOG.md) for more details.
 
-# NetEbics -- .NET Core EBICS Client Library
+This is a fork of [NetEbics](https://github.com/hohlerde/NetEbics) library.
 
-This is a client library implementing the [EBICS](http://www.ebics.org) protocol for business online banking.
+The library is written in C# (7.2) using .NET Core 3.1 and was tested with private/public keys (PEM files) on Linux/Windows. 
 
-The library is written in C# (7.2) using .NET Core 2.x and was tested with private/public keys (PEM files) on Linux/Windows. 
-
-**NetEbics is alpha software and should not be used for production**. API/breaking changes are very likely. 
+**This is alpha software and should not be used for production**. API/breaking changes are very likely. 
 
 ## Limitations
 
-* Usage with certificates has been prepared but not completely implemented yet. NetEbics works with private/public keys.
+* Usage with certificates has been prepared but not completely implemented yet. Library works with private/public keys.
 * Only version A005 for signatures can be used. A006 uses PSS padding, which is currently not supported by .NET Core 2.x. Bouncy Castle is only used for PEM file and certificate management.
 * Only version E002 for encryption can be used.
 * Only version X002 for authentication can be used.
-* NetEbics was developed using EBICS Version H004, but H005 should work.
+* Library was developed using EBICS Version H004, but H005 should work.
 * Currently implemented commands/requests: INI, HIA, HPB, PTK, SPR, STA, CCT, CDD
 
 ## Dependencies
 
-NetEbics is denpendent on the following libraries:
+EBICS.Net is denpendent on the following libraries:
 
 * [BouncyCastle](https://www.bouncycastle.org/csharp/) (used for PEM file and X509 certificate management) 
 * [Zlib](https://archive.codeplex.com/?p=dotnetzip) (used for un-/compressing EBICS order data)
@@ -29,7 +28,7 @@ NetEbics is denpendent on the following libraries:
 * Microsoft Xml Cryptography (used for basic xml security)
 * [StatePrinter](https://github.com/kbilsted/StatePrinter) (used for debug logs)
 
-NetEbics doesn't use dependency injection. See the csproj file for further information.
+EBICS.Net doesn't use dependency injection. See the csproj file for further information.
 
 ## Installation
 
@@ -40,13 +39,13 @@ Make sure you have the [.NET Core SDK](https://www.microsoft.com/net/learn/get-s
 Clone the repository.
 
 ```text
-git clone https://github.com/hohlerde/NetEbics.git
+git clone https://github.com/paavels/EBICS.Net.git
 ```
 
 Build the library.
 
 ```text
-cd NetEbics
+cd EBICS.Net
 dotnet pack -c Release
 ```
 
@@ -301,7 +300,7 @@ You need to reference `Serilog.Extensions.Logging` and `Serilog.Sinks.Console` i
 </ItemGroup>
 ```
 
-In an ASP.NET environment you just need to pass the `LoggerFactory` instance you get from the depency injection container to NetEbics.
+In an ASP.NET environment you just need to pass the `LoggerFactory` instance you get from the depency injection container to EbicsNet.
 
 ```csharp
 public MyController(ILoggerFactory loggerFactory)

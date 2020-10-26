@@ -8,7 +8,7 @@
 
 using System.Xml.Linq;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal class DataTransfer : NamespaceAware, IXElementSerializer
     {

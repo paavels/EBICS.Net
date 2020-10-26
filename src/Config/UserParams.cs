@@ -9,7 +9,7 @@
 using StatePrinting;
 using StatePrinting.OutputFormatters;
 
-namespace NetEbics.Config
+namespace EbicsNet.Config
 {
     public class UserParams
     {

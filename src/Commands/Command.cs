@@ -17,13 +17,13 @@ using System.Xml;
 using System.Xml.Linq;
 using Ionic.Zlib;
 using Microsoft.Extensions.Logging;
-using NetEbics.Config;
-using NetEbics.Exceptions;
-using NetEbics.Handler;
-using NetEbics.Responses;
-using NetEbics.Xml;
+using EbicsNet.Config;
+using EbicsNet.Exceptions;
+using EbicsNet.Handler;
+using EbicsNet.Responses;
+using EbicsNet.Xml;
 
-namespace NetEbics.Commands
+namespace EbicsNet.Commands
 {
     internal abstract class Command
     {

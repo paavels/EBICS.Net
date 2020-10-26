@@ -7,12 +7,12 @@
  */
 
 using Microsoft.Extensions.Logging;
-using NetEbics.Commands;
-using NetEbics.Config;
-using NetEbics.Parameters;
-using NetEbics.Responses;
+using EbicsNet.Commands;
+using EbicsNet.Config;
+using EbicsNet.Parameters;
+using EbicsNet.Responses;
 
-namespace NetEbics.Handler
+namespace EbicsNet.Handler
 {
     internal class CommandHandler
     {

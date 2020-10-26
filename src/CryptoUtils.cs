@@ -10,7 +10,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace NetEbics
+namespace EbicsNet
 {
     internal static class CryptoUtils
     {

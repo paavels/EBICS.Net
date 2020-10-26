@@ -8,7 +8,7 @@
 
 using System.Collections.Generic;
 
-namespace NetEbics.Parameters
+namespace EbicsNet.Parameters
 {    
     public class CddParams : Params
     {

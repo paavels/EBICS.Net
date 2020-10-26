@@ -9,7 +9,7 @@
 using StatePrinting;
 using StatePrinting.OutputFormatters;
 
-namespace NetEbics.Responses
+namespace EbicsNet.Responses
 {
     public class Response
     {

@@ -8,9 +8,9 @@
 
 using System;
 using System.Xml.Linq;
-using NetEbics.Config;
+using EbicsNet.Config;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal class BankPubKeyDigests : NamespaceAware, IXElementSerializer
     {

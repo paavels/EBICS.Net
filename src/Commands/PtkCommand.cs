@@ -12,13 +12,13 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
-using NetEbics.Exceptions;
-using NetEbics.Handler;
-using NetEbics.Parameters;
-using NetEbics.Responses;
-using NetEbics.Xml;
+using EbicsNet.Exceptions;
+using EbicsNet.Handler;
+using EbicsNet.Parameters;
+using EbicsNet.Responses;
+using EbicsNet.Xml;
 
-namespace NetEbics.Commands
+namespace EbicsNet.Commands
 {
     internal class PtkCommand : GenericCommand<PtkResponse>
     {

@@ -6,11 +6,11 @@
  * file 'LICENSE.txt', which is part of this source code package.
  */
 
-using NetEbics.Handler;
+using EbicsNet.Handler;
 using StatePrinting;
 using StatePrinting.OutputFormatters;
 
-namespace NetEbics.Commands
+namespace EbicsNet.Commands
 {
     internal class DeserializeResponse
     {

@@ -19,7 +19,7 @@ using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities;
 using Org.BouncyCastle.X509;
 
-namespace NetEbics
+namespace EbicsNet
 {
     public static class KeyUtils
     {

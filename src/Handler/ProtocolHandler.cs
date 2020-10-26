@@ -13,10 +13,10 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Extensions.Logging;
-using NetEbics.Commands;
-using NetEbics.Exceptions;
+using EbicsNet.Commands;
+using EbicsNet.Exceptions;
 
-namespace NetEbics.Handler
+namespace EbicsNet.Handler
 {
     internal class Context
     {

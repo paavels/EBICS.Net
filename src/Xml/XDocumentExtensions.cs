@@ -10,7 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     public static class XDocumentExtensions
     {

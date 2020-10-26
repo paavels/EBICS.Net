@@ -15,9 +15,9 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using NetEbics.Config;
+using EbicsNet.Config;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal class CustomSignedXml
     {

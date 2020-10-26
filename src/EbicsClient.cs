@@ -9,12 +9,12 @@
 using System;
 using System.Net.Http;
 using Microsoft.Extensions.Logging;
-using NetEbics.Config;
-using NetEbics.Handler;
-using NetEbics.Parameters;
-using NetEbics.Responses;
+using EbicsNet.Config;
+using EbicsNet.Handler;
+using EbicsNet.Parameters;
+using EbicsNet.Responses;
 
-namespace NetEbics
+namespace EbicsNet
 {
     public class EbicsClientFactory
     {

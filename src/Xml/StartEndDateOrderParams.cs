@@ -9,7 +9,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace NetEbics.Xml
+namespace EbicsNet.Xml
 {
     internal class StartEndDateOrderParams : NamespaceAware, IXElementSerializer
     {

@@ -9,7 +9,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace NetEbics.Exceptions
+namespace EbicsNet.Exceptions
 {
     public class ConnectionException: EbicsException
     {
