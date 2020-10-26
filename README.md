@@ -57,6 +57,7 @@ In order to use the library you should have a reasonable good understanding of t
 
 ### Initialization (INI/HIA)
 The first thing you want to do as a new EBICS user is to announce your public RSA keys to your bank. 
+
 You need to create three public/private key pairs for this (authentication, signature and encryption keys).
 
 Creating the keys is easy, however you should be careful on where you store your keys and how you distribute them.
@@ -68,6 +69,7 @@ KeyUtils.GenerateAndSaveRSAKeyPair("sign.key");
 ```
 
 This code will generate three keys ("auth.key", "enc.key", "sign.key"). 
+
 It is good idea to save those files in safe place and add keys to certificate store instead of using files:
 
 ```csharp
