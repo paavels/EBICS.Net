@@ -83,6 +83,7 @@ namespace EbicsNet.Xml
         public const string Ccy = "Ccy";
         public const string RmtInf = "RmtInf";
         public const string Ustrd = "Ustrd";
+        public const string InstrId = "InstrId";
         public const string EndToEndId = "EndToEndId";
         public const string Cdtr = "Cdtr";
         public const string Nm = "Nm";

@@ -30,7 +30,7 @@ namespace EbicsNet.Commands
         private string[] _orderData;
 
         internal StaParams Params { private get; set; }
-        internal override string OrderType => "STA";
+        internal override string OrderType { get; set; }
         internal override string OrderAttribute => "DZHNN";
         internal override TransactionType TransactionType => TransactionType.Download;
         internal override IList<XmlDocument> Requests => CreateRequests();
@@ -62,8 +62,11 @@ namespace EbicsNet.Commands
                             _initSegment = dr.SegmentNumber;
                             _initLastSegment = dr.LastSegment;
                             _orderData = new string[_numSegments];
-                            _orderData[dr.SegmentNumber - 1] =
-                                Encoding.UTF8.GetString(Decompress(DecryptOrderData(xph)));
+                            if (_numSegments > 0)
+                            {
+                                Response.BinaryData = Decompress(DecryptOrderData(xph)); 
+                                _orderData[dr.SegmentNumber - 1] = Encoding.UTF8.GetString(Response.BinaryData);
+                            }
                             Response.Data = string.Join("", _orderData);
                             break;
                         case TransactionPhase.Transfer:

@@ -42,7 +42,7 @@ namespace EbicsNet.Handler
                         cmd = new CctCommand {Params = cct, Config = Config, Namespaces = Namespaces};
                         break;
                     case StaParams sta:
-                        cmd = new StaCommand {Params = sta, Config = Config, Namespaces = Namespaces};
+                        cmd = new StaCommand {Params = sta, Config = Config, Namespaces = Namespaces, OrderType = sta.OrderType.ToString() };
                         break;
                     case SprParams spr:
                         cmd = new SprCommand {Params = spr, Config = Config, Namespaces = Namespaces};

@@ -56,38 +56,37 @@ You'll find the NuGet package under `bin/Release`.
 In order to use the library you should have a reasonable good understanding of the EBICS protocol.
 
 ### Initialization (INI/HIA)
-The first thing you want to do as a new EBICS user is to announce your public RSA keys to your bank. You need to create three public/private key pairs for this (authentication, signature and encryption keys).
+The first thing you want to do as a new EBICS user is to announce your public RSA keys to your bank. 
+You need to create three public/private key pairs for this (authentication, signature and encryption keys).
 
-Creating the keys is easy with BouncyCastle.
+Creating the keys is easy, however you should be careful on where you store your keys and how you distribute them.
 
 ```csharp
-var gen = GeneratorUtilities.GetKeyPairGenerator("RSA");
-gen.Init(new KeyGenerationParameters(new SecureRandom(), 4096));
-var signKeyPair = gen.GenerateKeyPair();   
-
-using (TextWriter sw = new StreamWriter("sign.key"))
-{
-    var pw = new PemWriter(sw);
-    pw.WriteObject(signKeyPair);
-    sw.Flush();
-}
+KeyUtils.GenerateAndSaveRSAKeyPair("auth.key");
+KeyUtils.GenerateAndSaveRSAKeyPair("enc.key");
+KeyUtils.GenerateAndSaveRSAKeyPair("sign.key");
 ```
 
-Adjust the above code and also create an authentication ("auth.key") and encryption ("enc.key") key.
-
-Announce your public signature key to your bank. Note that the previously generated keys are stored in PEM format and contain the private and public key.
+This code will generate three keys ("auth.key", "enc.key", "sign.key"). 
+It is good idea to save those files in safe place and add keys to certificate store instead of using files:
 
 ```csharp
-AsymmetricCipherKeyPair signKey;
+Console.WriteLine(string.Format("Added auth.key with thumbprint: {0} to store", KeyUtils.AddKeyToCertificateStore("auth.key", "teststore")));
+Console.WriteLine(string.Format("Added enc.key  with thumbprint: {0} to store", KeyUtils.AddKeyToCertificateStore("enc.key", "teststore")));
+Console.WriteLine(string.Format("Added sign.key with thumbprint: {0} to store", KeyUtils.AddKeyToCertificateStore("sign.key", "teststore")));
+```
 
-using (var sr = new StringReader(File.ReadAllText("sign.key").Trim()))
-{
-    var pr = new PemReader(sr);
-    signKey = pr.ReadObject();
-}
+You can retrieve certificates from store using, like so:
 
-var signCert = KeyUtils.CreateX509Certificate2(signKey);
+```csharp
+var authCert = KeyUtils.GetKeyFromCertificateStore("<certificate_thumbprint>", "teststore");
+var encCert  = KeyUtils.GetKeyFromCertificateStore("<certificate_thumbprint>", "teststore");
+var signCert = KeyUtils.GetKeyFromCertificateStore("<certificate_thumbprint>", "teststore");
+```
 
+Announce your public signature key to your bank. 
+
+```csharp
 var client = EbicsClient.Factory().Create(new EbicsConfig
 {
     Address = "The EBICS URL you got from your bank, i.e. https://ebics-server.com/",
@@ -107,17 +106,12 @@ var client = EbicsClient.Factory().Create(new EbicsConfig
     }
 });
 
-var resp = c.INI(new IniParams());
+var resp = client.INI(new IniParams());
 ```
 
 After that we need to announce the public authentication and encryption keys.
 
 ```csharp
-// loading of keys "auth.key" and "enc.key" omitted
-
-var authCert = KeyUtils.CreateX509Certificate2(authKey);
-var encCert = KeyUtils.CreateX509Certificate2(encKey);
-
 var client = EbicsClient.Factory().Create(new EbicsConfig
 {
     Address = "The EBICS URL you got from your bank, i.e. https://ebics-server.com/",
@@ -143,7 +137,7 @@ var client = EbicsClient.Factory().Create(new EbicsConfig
     }
 });
 
-var resp = c.HIA(new HiaParams());
+var resp = client.HIA(new HiaParams());
 ```
 
 Announcing the keys is not enough, as the bank needs to be sure that the keys really belong to you. To prove this, you need to send the INI and HIA letters to your bank. They contain hash values of your public keys and your written signature. The EBICS specification describes in detail how these letters should look like.
@@ -153,11 +147,6 @@ Announcing the keys is not enough, as the bank needs to be sure that the keys re
 In order to communicate via EBICS with the bank you need the bank's public keys, because data exchanged needs to be encrypted and authenticated.
 
 ```csharp
-// loading of keys "auth.key" and "enc.key" omitted
-
-var authCert = KeyUtils.CreateX509Certificate2(authKey);
-var encCert = KeyUtils.CreateX509Certificate2(encKey);
-
 var client = EbicsClient.Factory().Create(new EbicsConfig
 {
     Address = "The EBICS URL you got from your bank, i.e. https://ebics-server.com/",
@@ -183,14 +172,14 @@ var client = EbicsClient.Factory().Create(new EbicsConfig
     }
 });
 
-var hpbResp = c.HPB(new HpbParams());
+var hpbResp = client.HPB(new HpbParams());
 if (hpbResp.TechnicalReturnCode != 0 || hpbResp.BusinessReturnCode != 0)
 {
     // handle error
     return;
 }
 
-c.Config.Bank = resp.Bank; // set bank's public keys
+client.Config.Bank = resp.Bank; // set bank's public keys
 
 // now issue other commands 
 ```
@@ -198,12 +187,6 @@ c.Config.Bank = resp.Bank; // set bank's public keys
 ### Direct credit transfer (CCT)
 
 ```csharp
-// loading of keys "auth.key", "enc.key" and "sign.key" omitted
-
-var authCert = KeyUtils.CreateX509Certificate2(authKey);
-var encCert = KeyUtils.CreateX509Certificate2(encKey);
-var signCert = KeyUtils.CreateX509Certificate2(signKey);
-
 var client = EbicsClient.Factory().Create(new EbicsConfig
 {
     Address = "The EBICS URL you got from your bank, i.e. https://ebics-server.com/",
@@ -242,7 +225,7 @@ if (hpbResp.TechnicalReturnCode != 0 || hpbResp.BusinessReturnCode != 0)
     return;
 }
 
-c.Config.Bank = resp.Bank; // set bank's public keys
+client.Config.Bank = resp.Bank; // set bank's public keys
 
 // create credit transfer data structure
 
@@ -274,7 +257,7 @@ var cctParams = new CctParams
     }
 };
 
-var cctResp = c.CCT(cctParams);
+var cctResp = client.CCT(cctParams);
 ```
 
 ## Logs

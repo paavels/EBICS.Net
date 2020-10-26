@@ -109,7 +109,6 @@ namespace EbicsNet.Commands
             var xmlPayInfos = new List<XElement>();
             foreach (var pi in Params.PaymentInfos)
             {
-                var piid = CryptoUtils.GetNonce();
                 var ctrlSum = 0m;
                 var xmlCtis = new List<XElement>();
 
@@ -128,6 +127,7 @@ namespace EbicsNet.Commands
 
                     var xmlCti = new XElement(ns + XmlNames.CdtTrfTxInf,
                         new XElement(ns + XmlNames.PmtId,
+                            new XElement(ns + XmlNames.InstrId, CryptoUtils.GetNonce()),
                             new XElement(ns + XmlNames.EndToEndId, endToEndID)
                         ),
                         new XElement(ns + XmlNames.Amt,
@@ -165,7 +165,7 @@ namespace EbicsNet.Commands
                 }
 
                 var xmlPayInfo = new XElement(ns + XmlNames.PmtInf,
-                    new XElement(ns + XmlNames.PmtInfId, piid),
+                    new XElement(ns + XmlNames.PmtInfId, CryptoUtils.GetNonce()),
                     new XElement(ns + XmlNames.PmtMtd, "TRF"),
                     new XElement(ns + XmlNames.BtchBookg, pi.BatchBooking.ToString().ToLower()),
                     new XElement(ns + XmlNames.NbOfTxs, pi.CreditTransferTransactionInfos.Count().ToString()),

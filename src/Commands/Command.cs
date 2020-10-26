@@ -32,7 +32,7 @@ namespace EbicsNet.Commands
         internal EbicsConfig Config { get; set; }
         internal NamespaceConfig Namespaces { get; set; }
 
-        internal abstract string OrderType { get; }
+        internal virtual string OrderType { get; set; }
         internal abstract string OrderAttribute { get; }
         internal abstract TransactionType TransactionType { get; }
 

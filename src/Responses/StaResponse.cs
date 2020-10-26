@@ -11,5 +11,6 @@ namespace EbicsNet.Responses
     public class StaResponse: Response
     {
         public string Data { get; internal set; }
+        public byte[] BinaryData { get; internal set; }
     }
 }

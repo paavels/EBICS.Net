@@ -62,7 +62,7 @@ namespace EbicsNet
             const string pwd = "password";
             var stream = new MemoryStream();
             store.Save(stream, pwd.ToCharArray(), random);
-            var msCert = new X509Certificate2(stream.ToArray(), pwd, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            var msCert = new X509Certificate2(stream.ToArray(), pwd, X509KeyStorageFlags.PersistKeySet); //  | X509KeyStorageFlags.Exportable
 
             return msCert;
         }
@@ -73,5 +73,60 @@ namespace EbicsNet
             gen.Init(new KeyGenerationParameters(new SecureRandom(), strength));
             return gen.GenerateKeyPair();            
         }
+
+        /// <summary>
+        /// Generates RSA key pair and saves to file
+        /// </summary>
+        /// <param name="fileName"></param>
+        public static void GenerateAndSaveRSAKeyPair(string fileName)
+        {
+            var keyPair = GenerateRSAKeyPair(4096);
+
+            using (TextWriter sw = new StreamWriter(fileName))
+            {
+                var pw = new PemWriter(sw);
+                pw.WriteObject(keyPair);
+                sw.Flush();
+            }
+        }
+
+        public static string AddKeyToCertificateStore(string fileName, string storeName)
+        {
+            AsymmetricCipherKeyPair signKey;
+
+            using (var sr = new StringReader(File.ReadAllText(fileName).Trim()))
+            {
+                var pr = new PemReader(sr);
+                signKey = (AsymmetricCipherKeyPair)pr.ReadObject();
+            }
+
+            var cert = CreateX509Certificate2(signKey);
+
+            using (var store = new X509Store(storeName, StoreLocation.CurrentUser))
+            {
+                store.Open(OpenFlags.ReadWrite);
+                store.Add(cert);
+                store.Close();
+            }
+
+            return cert.Thumbprint;
+        }
+
+        public static X509Certificate2 GetKeyFromCertificateStore(string thumbPrint, string storeName)
+        {
+            X509Certificate2 cert = null;
+            using (var store = new X509Store(storeName, StoreLocation.CurrentUser))
+            {
+                store.Open(OpenFlags.ReadWrite);
+                var results = store.Certificates.Find(X509FindType.FindByThumbprint, thumbPrint, true);
+                if (results.Count > 0) cert = results[0];
+
+                store.Close();
+            }
+
+            return cert;
+        }
+
+
     }
 }
